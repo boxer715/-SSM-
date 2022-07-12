@@ -1,30 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bbx.mapper.AccountBookMapper">
-  <resultMap id="BaseResultMap" type="bbx.bean.AccountBook">
-    <id column="accountBook_id" jdbcType="INTEGER" property="accountbookId" />
-    <result column="accountBook_name" jdbcType="VARCHAR" property="accountbookName" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bbx.mapper.AccountBookMapper" >
+  <resultMap id="BaseResultMap" type="bbx.bean.AccountBook" >
+    <id column="accountBook_id" property="accountbookId" jdbcType="INTEGER" />
+    <result column="accountBook_name" property="accountbookName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -35,25 +35,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -64,293 +64,116 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     accountBook_id, accountBook_name, user_id
   </sql>
-  <select id="selectByExample" parameterType="bbx.bean.AccountBookExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="bbx.bean.AccountBookExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from accountBook
-    <if test="_parameter != null">
+    from tbl_accountBook
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from accountBook
+    from tbl_accountBook
     where accountBook_id = #{accountbookId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from accountBook
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_accountBook
     where accountBook_id = #{accountbookId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="bbx.bean.AccountBookExample">
-    delete from accountBook
-    <if test="_parameter != null">
+  <delete id="deleteByExample" parameterType="bbx.bean.AccountBookExample" >
+    delete from tbl_accountBook
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="bbx.bean.AccountBook">
-    insert into accountBook (accountBook_id, accountBook_name, user_id
+  <insert id="insert" parameterType="bbx.bean.AccountBook" >
+    insert into tbl_accountBook (accountBook_id, accountBook_name, user_id
       )
     values (#{accountbookId,jdbcType=INTEGER}, #{accountbookName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="bbx.bean.AccountBook">
-    insert into accountBook
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="accountbookId != null">
+  <insert id="insertSelective" parameterType="bbx.bean.AccountBook" >
+    insert into tbl_accountBook
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountbookId != null" >
         accountBook_id,
       </if>
-      <if test="accountbookName != null">
+      <if test="accountbookName != null" >
         accountBook_name,
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         user_id,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="accountbookId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountbookId != null" >
         #{accountbookId,jdbcType=INTEGER},
       </if>
-      <if test="accountbookName != null">
+      <if test="accountbookName != null" >
         #{accountbookName,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         #{userId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="bbx.bean.AccountBookExample" resultType="java.lang.Integer">
-    select count(*) from accountBook
-    <if test="_parameter != null">
+  <select id="countByExample" parameterType="bbx.bean.AccountBookExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_accountBook
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update accountBook
-    <set>
-      <if test="record.accountbookId != null">
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tbl_accountBook
+    <set >
+      <if test="record.accountbookId != null" >
         accountBook_id = #{record.accountbookId,jdbcType=INTEGER},
       </if>
-      <if test="record.accountbookName != null">
+      <if test="record.accountbookName != null" >
         accountBook_name = #{record.accountbookName,jdbcType=VARCHAR},
       </if>
-      <if test="record.userId != null">
+      <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=VARCHAR},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
-    update accountBook
+  <update id="updateByExample" parameterType="map" >
+    update tbl_accountBook
     set accountBook_id = #{record.accountbookId,jdbcType=INTEGER},
       accountBook_name = #{record.accountbookName,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=VARCHAR}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="bbx.bean.AccountBook">
-    update accountBook
-    <set>
-      <if test="accountbookName != null">
+  <update id="updateByPrimaryKeySelective" parameterType="bbx.bean.AccountBook" >
+    update tbl_accountBook
+    <set >
+      <if test="accountbookName != null" >
         accountBook_name = #{accountbookName,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null">
+      <if test="userId != null" >
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
     </set>
     where accountBook_id = #{accountbookId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="bbx.bean.AccountBook">
-    update accountBook
-    set accountBook_name = #{accountbookName,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=VARCHAR}
-    where accountBook_id = #{accountbookId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="bbx.bean.AccountBook">
-    <id column="accountBook_id" jdbcType="INTEGER" property="accountbookId" />
-    <result column="accountBook_name" jdbcType="VARCHAR" property="accountbookName" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    accountBook_id, accountBook_name, user_id
-  </sql>
-  <select id="selectByExample" parameterType="bbx.bean.AccountBookExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from accountBook
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from accountBook
-    where accountBook_id = #{accountbookId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from accountBook
-    where accountBook_id = #{accountbookId,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="bbx.bean.AccountBookExample">
-    delete from accountBook
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="bbx.bean.AccountBook">
-    insert into accountBook (accountBook_id, accountBook_name, user_id
-      )
-    values (#{accountbookId,jdbcType=INTEGER}, #{accountbookName,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="bbx.bean.AccountBook">
-    insert into accountBook
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="accountbookId != null">
-        accountBook_id,
-      </if>
-      <if test="accountbookName != null">
-        accountBook_name,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="accountbookId != null">
-        #{accountbookId,jdbcType=INTEGER},
-      </if>
-      <if test="accountbookName != null">
-        #{accountbookName,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="bbx.bean.AccountBookExample" resultType="java.lang.Integer">
-    select count(*) from accountBook
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update accountBook
-    <set>
-      <if test="record.accountbookId != null">
-        accountBook_id = #{record.accountbookId,jdbcType=INTEGER},
-      </if>
-      <if test="record.accountbookName != null">
-        accountBook_name = #{record.accountbookName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update accountBook
-    set accountBook_id = #{record.accountbookId,jdbcType=INTEGER},
-      accountBook_name = #{record.accountbookName,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="bbx.bean.AccountBook">
-    update accountBook
-    <set>
-      <if test="accountbookName != null">
-        accountBook_name = #{accountbookName,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where accountBook_id = #{accountbookId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="bbx.bean.AccountBook">
-    update accountBook
+  <update id="updateByPrimaryKey" parameterType="bbx.bean.AccountBook" >
+    update tbl_accountBook
     set accountBook_name = #{accountbookName,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=VARCHAR}
     where accountBook_id = #{accountbookId,jdbcType=INTEGER}
