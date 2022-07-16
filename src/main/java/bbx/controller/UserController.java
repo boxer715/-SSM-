@@ -40,4 +40,15 @@ public class UserController {
 	    userService.saveUser(user);
 	    return Msg.success();
 	}
+	
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg login(String userName, String userPassword) {
+	    int output = userService.checkUser(userName, userPassword);
+	    if(output==0) {
+	    	return Msg.fail().add("message", "用户名或密码错误");
+	    } else {
+	    	return Msg.success();
+	    }
+	}
 }

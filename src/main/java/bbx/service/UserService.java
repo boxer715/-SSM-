@@ -24,4 +24,10 @@ public class UserService {
 		userMapper.insertSelective(user);
 	}
 
+	public int checkUser(String userName, String userPassword) {
+		UserExample userExm = new UserExample();
+		userExm.createCriteria().andUserNameEqualTo(userName).andUserPasswordEqualTo(userPassword);
+		return userMapper.selectByExample(userExm).size();
+	}
+
 }
