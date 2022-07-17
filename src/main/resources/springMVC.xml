@@ -39,6 +39,7 @@
 	<mvc:view-controller path="/remarkSignUp" view-name="remark/signUp"></mvc:view-controller>
 	<mvc:view-controller path="/remarkLogInSuccess" view-name="remark/loginSuccess"></mvc:view-controller>
 	<mvc:view-controller path="/accountBookList" view-name="users/accountBookList"></mvc:view-controller>
+	<mvc:view-controller path="/expenseList" view-name="users//expenseList"></mvc:view-controller>
 	
 	<!--开放对静态资源的访问-->
     <mvc:default-servlet-handler />

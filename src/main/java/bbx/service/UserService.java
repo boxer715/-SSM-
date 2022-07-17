@@ -1,5 +1,7 @@
 package bbx.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +26,10 @@ public class UserService {
 		userMapper.insertSelective(user);
 	}
 
-	public int checkUser(String userName, String userPassword) {
+	public List<User> checkUser(String userName, String userPassword) {
 		UserExample userExm = new UserExample();
 		userExm.createCriteria().andUserNameEqualTo(userName).andUserPasswordEqualTo(userPassword);
-		return userMapper.selectByExample(userExm).size();
+		return userMapper.selectByExample(userExm);
 	}
 
 }

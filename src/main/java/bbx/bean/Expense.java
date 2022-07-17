@@ -70,4 +70,12 @@ public class Expense {
     public void setExpenseDate(String expenseDate) {
         this.expenseDate = expenseDate == null ? null : expenseDate.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Expense [expenseId=" + expenseId + ", accountId=" + accountId + ", typeId=" + typeId
+				+ ", accountbookId=" + accountbookId + ", expenseAmount=" + expenseAmount + ", expenseComment="
+				+ expenseComment + ", expenseDate=" + expenseDate + "]";
+	}
+    
 }

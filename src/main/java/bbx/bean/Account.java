@@ -30,4 +30,11 @@ public class Account {
     public void setAccountbookId(String accountbookId) {
         this.accountbookId = accountbookId == null ? null : accountbookId.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Account [accountId=" + accountId + ", accountName=" + accountName + ", accountbookId=" + accountbookId
+				+ "]";
+	}
+    
 }

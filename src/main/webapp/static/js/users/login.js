@@ -10,9 +10,11 @@ $(document).on("click","#signInBtn",function(){
 	    type:"POST",
 	    data:$("#loginForm").serialize(),
 	    success:function(result){
+	    	console.log(result);
 	    	if(result.code==200){
 	    		$("#warningMessage").css("color","#F00").text(result.extend.message);
 	    	} else {
+	    		localStorage.setItem("userId",result.extend.userId);
 	    		window.location.href = localStorage.getItem("baseUrl")+"remarkLogInSuccess";
 	    	}
 	    }

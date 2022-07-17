@@ -1,5 +1,7 @@
 package bbx.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,11 +46,11 @@ public class UserController {
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	@ResponseBody
 	public Msg login(String userName, String userPassword) {
-	    int output = userService.checkUser(userName, userPassword);
-	    if(output==0) {
+	    List<User> users = userService.checkUser(userName, userPassword);
+	    if(users.size()==0) {
 	    	return Msg.fail().add("message", "用户名或密码错误");
 	    } else {
-	    	return Msg.success();
+	    	return Msg.success().add("userId", users.get(0).getUserId());
 	    }
 	}
 }
