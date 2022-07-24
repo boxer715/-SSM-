@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="bbx.bean.Account" >
     <id column="account_id" property="accountId" jdbcType="INTEGER" />
     <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="account_amount" property="accountAmount" jdbcType="VARCHAR" />
     <result column="accountBook_id" property="accountbookId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    account_id, account_name, accountBook_id
+    account_id, account_name, account_amount, accountBook_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="bbx.bean.AccountExample" >
     select
@@ -98,10 +99,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="bbx.bean.Account" >
-    insert into tbl_account (account_id, account_name, accountBook_id
-      )
-    values (#{accountId,jdbcType=INTEGER}, #{accountName,jdbcType=VARCHAR}, #{accountbookId,jdbcType=VARCHAR}
-      )
+    insert into tbl_account (account_id, account_name, account_amount, 
+      accountBook_id)
+    values (#{accountId,jdbcType=INTEGER}, #{accountName,jdbcType=VARCHAR}, #{accountAmount,jdbcType=VARCHAR}, 
+      #{accountbookId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="bbx.bean.Account" >
     insert into tbl_account
@@ -111,6 +112,9 @@
       </if>
       <if test="accountName != null" >
         account_name,
+      </if>
+      <if test="accountAmount != null" >
+        account_amount,
       </if>
       <if test="accountbookId != null" >
         accountBook_id,
@@ -122,6 +126,9 @@
       </if>
       <if test="accountName != null" >
         #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountAmount != null" >
+        #{accountAmount,jdbcType=VARCHAR},
       </if>
       <if test="accountbookId != null" >
         #{accountbookId,jdbcType=VARCHAR},
@@ -143,6 +150,9 @@
       <if test="record.accountName != null" >
         account_name = #{record.accountName,jdbcType=VARCHAR},
       </if>
+      <if test="record.accountAmount != null" >
+        account_amount = #{record.accountAmount,jdbcType=VARCHAR},
+      </if>
       <if test="record.accountbookId != null" >
         accountBook_id = #{record.accountbookId,jdbcType=VARCHAR},
       </if>
@@ -155,6 +165,7 @@
     update tbl_account
     set account_id = #{record.accountId,jdbcType=INTEGER},
       account_name = #{record.accountName,jdbcType=VARCHAR},
+      account_amount = #{record.accountAmount,jdbcType=VARCHAR},
       accountBook_id = #{record.accountbookId,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,6 +177,9 @@
       <if test="accountName != null" >
         account_name = #{accountName,jdbcType=VARCHAR},
       </if>
+      <if test="accountAmount != null" >
+        account_amount = #{accountAmount,jdbcType=VARCHAR},
+      </if>
       <if test="accountbookId != null" >
         accountBook_id = #{accountbookId,jdbcType=VARCHAR},
       </if>
@@ -175,6 +189,7 @@
   <update id="updateByPrimaryKey" parameterType="bbx.bean.Account" >
     update tbl_account
     set account_name = #{accountName,jdbcType=VARCHAR},
+      account_amount = #{accountAmount,jdbcType=VARCHAR},
       accountBook_id = #{accountbookId,jdbcType=VARCHAR}
     where account_id = #{accountId,jdbcType=INTEGER}
   </update>

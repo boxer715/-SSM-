@@ -9,7 +9,7 @@
 	<script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
 	<style type="text/css">
 		div{
-			/* border: 1px solid grey; */
+			 border: 1px solid grey; 
 		}
 		div.center{
 			text-align:center;
@@ -55,10 +55,20 @@
 		<!-- 按钮 -->
 		<div class="row">
 			<div class="col-md-2">
-				<button class="btn btn-primary center" id="logOutBtn">Log Out</button>
+				<a class="btn btn-default" th:href="@{/accountBookList}" role="button">Back</a>
 			</div>
-			<div class="col-md-2 col-md-offset-8">
-				<button class="btn btn-primary center" id="newAccountBookBtn">新增账本</button>
+			<div class="col-md-2">
+				<a class="btn btn-default" th:href="@{/accountList}" role="button">Account</a>
+			</div>
+			
+			<div class="col-md-2 col-md-offset-2">
+				<button class="btn btn-primary center" id="newExpenseBtn">新增费用</button>
+			</div>
+			<div class="col-md-2 ">
+				<button class="btn btn-primary center" id="summaryBtn">总结费用</button>
+			</div>
+			<div class="col-md-2 ">
+				<button class="btn btn-primary center" id="deleteAccountBookBtn">删除账本</button>
 			</div>
 		</div>
 		
@@ -78,7 +88,7 @@
 	
 	</div>
 	<script type="text/javascript">
-		$(loadAccountBook());
+		$(loadExpense());
 	</script>
 </body>
 </html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>账户清单</title>
+	<script type="text/javascript" th:src="@{/static/js/jquery-3.6.0.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/users/accountList.js}"></script>
+	<link th:href="@{/static/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+	<script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+	<style type="text/css">
+		div{
+			 border: 1px solid grey; 
+		}
+		div.center{
+			text-align:center;
+		}
+	</style>
+</head>
+<body>
+<!--   更新模态框  -->
+	<div class="modal fade" id="AccountUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">修改账户</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form class="form-horizontal">
+			  <div class="form-group">
+			    <label class="col-sm-2 control-label">账户名字</label>
+			    <div class="col-sm-10">
+			      <input type="text" id="account_update_name" name="accountName" class="form-control">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label class="col-sm-2 control-label">账户金额</label>
+			    <div class="col-sm-10">
+			      <input type="text" id="account_update_amount" name="accountAmount" class="form-control">
+			    </div>
+			  </div>
+ 
+			</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	        <button type="button" class="btn btn-primary" id="account_update_btn">更新</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<div class="modal fade" id="AccountAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">添加新账户</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form class="form-horizontal">
+			  <div class="form-group">
+			    <label class="col-sm-2 control-label">账户名字</label>
+			    <div class="col-sm-10">
+			      <input type="text" name="accountName" class="form-control">
+				  <input type="hidden" name="accountbookId" id="hiddenAccountbookId">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label class="col-sm-2 control-label">账户金额</label>
+			    <div class="col-sm-10">
+			      <input type="text" name="accountAmount" class="form-control">
+			    </div>
+			  </div>
+ 
+			</form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	        <button type="button" class="btn btn-primary" id="account_save_btn">保存</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<div class="container">
+		<div class="row" >
+			<div class="col-md-12 center" >
+				<h1>accountList</h1>
+			</div>
+		</div>
+		
+		<!-- 按钮 -->
+		<div class="row">
+			<div class="col-md-2">
+				<a class="btn btn-default" th:href="@{/expenseList}" role="button">Back</a>
+			</div>
+			<div class="col-md-2 col-md-offset-8">
+				<button class="btn btn-primary center" id="newAccountBtn">新增账户</button>
+			</div>
+		</div>
+		
+		<!-- 显示表格数据 -->
+		<!-- 显示表格数据 -->
+		<div class="row" style="height:300px;" id="account_div">
+			<div class="col-md-10 col-md-offset-2">
+				<table class="table table-hover" id="account_table">
+					<thead>
+						<tr>
+							<th>Account Name</th>
+							<th>Amount</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		
+	
+	</div>
+	<script type="text/javascript">
+		$(loadAccount());
+	</script>
+</body>
+</html>

@@ -234,6 +234,76 @@ public class AccountExample {
             return (Criteria) this;
         }
 
+        public Criteria andAccountAmountIsNull() {
+            addCriterion("account_amount is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountIsNotNull() {
+            addCriterion("account_amount is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountEqualTo(String value) {
+            addCriterion("account_amount =", value, "accountAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountNotEqualTo(String value) {
+            addCriterion("account_amount <>", value, "accountAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountGreaterThan(String value) {
+            addCriterion("account_amount >", value, "accountAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountGreaterThanOrEqualTo(String value) {
+            addCriterion("account_amount >=", value, "accountAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountLessThan(String value) {
+            addCriterion("account_amount <", value, "accountAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountLessThanOrEqualTo(String value) {
+            addCriterion("account_amount <=", value, "accountAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountLike(String value) {
+            addCriterion("account_amount like", value, "accountAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountNotLike(String value) {
+            addCriterion("account_amount not like", value, "accountAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountIn(List<String> values) {
+            addCriterion("account_amount in", values, "accountAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountNotIn(List<String> values) {
+            addCriterion("account_amount not in", values, "accountAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountBetween(String value1, String value2) {
+            addCriterion("account_amount between", value1, value2, "accountAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountAmountNotBetween(String value1, String value2) {
+            addCriterion("account_amount not between", value1, value2, "accountAmount");
+            return (Criteria) this;
+        }
+
         public Criteria andAccountbookIdIsNull() {
             addCriterion("accountBook_id is null");
             return (Criteria) this;

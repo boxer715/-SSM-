@@ -5,6 +5,8 @@ public class Account {
 
     private String accountName;
 
+    private String accountAmount;
+
     private String accountbookId;
 
     public Integer getAccountId() {
@@ -23,6 +25,14 @@ public class Account {
         this.accountName = accountName == null ? null : accountName.trim();
     }
 
+    public String getAccountAmount() {
+        return accountAmount;
+    }
+
+    public void setAccountAmount(String accountAmount) {
+        this.accountAmount = accountAmount == null ? null : accountAmount.trim();
+    }
+
     public String getAccountbookId() {
         return accountbookId;
     }
@@ -33,8 +43,9 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account [accountId=" + accountId + ", accountName=" + accountName + ", accountbookId=" + accountbookId
-				+ "]";
+		return "Account [accountId=" + accountId + ", accountName=" + accountName + ", accountAmount=" + accountAmount
+				+ ", accountbookId=" + accountbookId + "]";
 	}
+    
     
 }
