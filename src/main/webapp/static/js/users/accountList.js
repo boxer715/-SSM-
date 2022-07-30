@@ -38,6 +38,21 @@ $(document).on("click","#account_save_btn",function(){
 	});
 });
 
+//点击删除账本
+$(document).on("click",".delete_btn",function(){
+	var accountName = $(this).parents("tr").find("td:eq(0)").text();
+	if(confirm("确认删除【"+accountName+"】吗？")){
+		$.ajax({
+			url:localStorage.getItem("baseUrl")+"account/"+$(this).attr("del-id"),
+			type:"DELETE",
+			success:function(result){
+				console.log(result);
+				loadAccount();
+			}
+		});
+	}
+});
+
 //编辑账户模态框
 $(document).on("click",".edit_btn",function(){
 	//2、填充账户信息

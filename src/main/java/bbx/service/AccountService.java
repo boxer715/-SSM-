@@ -33,4 +33,8 @@ public class AccountService {
 		accountMapper.updateByPrimaryKeySelective(account);
 	}
 
+	public void deleteAccountById(Integer id) {
+		accountMapper.deleteByPrimaryKey(id);
+	}
+
 }

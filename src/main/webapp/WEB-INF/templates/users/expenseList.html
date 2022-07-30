@@ -4,13 +4,12 @@
 	<meta charset="UTF-8">
 	<title>花费清单</title>
 	<script type="text/javascript" th:src="@{/static/js/jquery-3.6.0.js}"></script>
-	<script type="text/javascript" th:src="@{/static/js/users/accountBookList.js}"></script>
+	<script type="text/javascript" th:src="@{/static/js/users/expenseList.js}"></script>
 	<link th:href="@{/static/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 	<script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
 	<style type="text/css">
 		div{
-			 border: 1px solid grey; 
-		}
+		 border: 1px solid grey;  	}
 		div.center{
 			text-align:center;
 		}
@@ -61,10 +60,7 @@
 				<a class="btn btn-default" th:href="@{/accountList}" role="button">Account</a>
 			</div>
 			
-			<div class="col-md-2 col-md-offset-2">
-				<button class="btn btn-primary center" id="newExpenseBtn">新增费用</button>
-			</div>
-			<div class="col-md-2 ">
+			<div class="col-md-2 col-md-offset-4">
 				<button class="btn btn-primary center" id="summaryBtn">总结费用</button>
 			</div>
 			<div class="col-md-2 ">
@@ -72,15 +68,80 @@
 			</div>
 		</div>
 		
+		<!-- 新建支出 -->
+		<div class="row" style="height: 5px"></div>
+		<div class="row" style="border: 1px solid grey;">
+			<form class="form-inline">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-2">
+							<h4>新建支出</h4>
+						</div>
+					
+		 				<div class="form-group col-md-3">
+						    <label for="AmountInNewExpense">金额:&nbsp;</label>
+					      	<input type="text" name="expenseAmount" id="AmountInNewExpense" class="form-control">
+					  	</div>
+					</div>
+				</div>
+
+				<div class="col-md-12">
+					<div class="row">
+						<div class="form-group col-md-2">
+						    <label for="AccountInNewExpense">账户:&nbsp;</label>
+						    <select id="AccountInNewExpense" class="form-control"
+						    		 name="accountId">
+						    		 <option>请选择</option>
+				    		 </select>
+					  	</div>
+					  	<div class="form-group col-md-3">
+						    <label for="TypeOneInNewExpense">类型:&nbsp;</label>
+						    <select id="TypeOneInNewExpense" class="form-control">
+						    		 <option hidden>一级类型</option>
+				    		 </select>
+				    		 <select id="TypeTwoInNewExpense" class="form-control"
+						    		 name="typeId" style="display: none;">
+						    		 <option hidden>二级类型</option>
+				    		 </select>
+				    		 <input type="hidden" name="accountbookId" id="hiddenAccountbookId">
+					  	</div>
+					  	<div class="form-group col-md-3">
+						    <label for="CommentInNewExpense">备注:&nbsp;</label>
+					      	<input type="text" name="expenseComment" id="CommentInNewExpense" class="form-control">
+					  	</div>
+					  	<div class="form-group col-md-3">
+						    <label for="DateInNewExpense">日期:&nbsp;</label>
+					      	<input type="Date" name="expenseDate" id="DateInNewExpense" class="form-control">
+					  	</div>
+					  	<div class="col-md-1">
+						    <button type="button" class="btn btn-primary" id="expense_save_btn">保存</button>
+					  	</div>
+				    </div>
+				</div>
+			</form>
+		</div>
+		
+		<div class="row" style="height: 5px"></div>
 		<!-- 显示表格数据 -->
 		<div class="row" id="accountBooks">
-			<div class="col-md-8 col-md-offset-2" style="height:25px;">
-			</div>
-			<div class="col-md-8 col-md-offset-2" style="height:50px;">
-			</div>
-			<div class="col-md-8 col-md-offset-2" style="height:25px;">
-			</div>
-			<div class="col-md-8 col-md-offset-2" style="height:50px;">
+			<div class="col-md-12">
+				<table class="table table-hover" id="expense_table">
+					<thead>
+						<tr>
+							<th>
+								<input type="checkbox" id="check_all"/>
+							</th>
+							<th>Date</th>
+							<th>Type</th>
+							<th>Account</th>
+							<th>Amount</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
 			</div>
 		</div>
 		
