@@ -16,20 +16,21 @@
 	</style>
 </head>
 <body>
-	<div class="modal fade" id="AccountBookAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="TypeAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title" id="myModalLabel">添加新账本</h4>
+	        <h4 class="modal-title" id="addTypeLabel"></h4>
 	      </div>
 	      <div class="modal-body">
 	        <form class="form-horizontal">
 			  <div class="form-group">
-			    <label class="col-sm-2 control-label">账本名字</label>
+			    <label class="col-sm-2 control-label">类别名字</label>
 			    <div class="col-sm-10">
-			      <input type="text" name="accountbookName" class="form-control">
-				  <input type="hidden" name="userId" id="hiddenUserId">
+			      <input type="text" name="typeName" class="form-control">
+				  <input type="hidden" name="typeParent" id="hiddenParentId">
+				  <input type="hidden" name="accountbookId" id="hiddenAccountbookId">
 			    </div>
 			  </div>
 			  
@@ -38,7 +39,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-	        <button type="button" class="btn btn-primary" id="accountBook_save_btn">保存</button>
+	        <button type="button" class="btn btn-primary" id="type_save_btn">保存</button>
 	      </div>
 	    </div>
 	  </div>
@@ -82,6 +83,12 @@
 						    <label for="AmountInNewExpense">金额:&nbsp;</label>
 					      	<input type="text" name="expenseAmount" id="AmountInNewExpense" class="form-control">
 					  	</div>
+					  	
+					  	<div class="form-group col-md-3 col-md-offset-2">
+						    <label for="DateInNewExpense">日期:&nbsp;</label>
+					      	<input type="Date" name="expenseDate" id="DateInNewExpense" class="form-control">
+					  	</div>
+					  	
 					</div>
 				</div>
 
@@ -94,26 +101,39 @@
 						    		 <option>请选择</option>
 				    		 </select>
 					  	</div>
-					  	<div class="form-group col-md-3">
+					  	<div class="form-group col-md-5">
 						    <label for="TypeOneInNewExpense">类型:&nbsp;</label>
-						    <select id="TypeOneInNewExpense" class="form-control">
-						    		 <option hidden>一级类型</option>
-				    		 </select>
-				    		 <select id="TypeTwoInNewExpense" class="form-control"
-						    		 name="typeId" style="display: none;">
-						    		 <option hidden>二级类型</option>
-				    		 </select>
+						    <div class="input-group">
+						    	 <div class="input-group-addon">
+						    	 	<button type="button" class="btn btn-info btn-xs" id="oneType_add_btn">
+						    	 		<span class="glyphicon glyphicon-plus"></span>
+						    	 	</button>
+						    	 </div>
+								<select id="TypeOneInNewExpense" class="form-control">
+									<option hidden>一级类型</option>
+								</select>
+						    </div>
+						    
+						    <div id="secondTypeDiv" class="input-group">
+						    	 <div class="input-group-addon">
+						    	 	<button type="button" class="btn btn-info btn-xs" id="twoType_add_btn">
+						    	 		<span class="glyphicon glyphicon-plus"></span>
+						    	 	</button>
+						    	 </div>
+					    		 <select id="TypeTwoInNewExpense" class="form-control"
+							    		 name="typeId">
+							    		 <option hidden>二级类型</option>
+					    		 </select>
+						    </div>
+
 				    		 <input type="hidden" name="accountbookId" id="hiddenAccountbookId">
 					  	</div>
-					  	<div class="form-group col-md-3">
+					  	<div class="form-group col-md-3 ">
 						    <label for="CommentInNewExpense">备注:&nbsp;</label>
 					      	<input type="text" name="expenseComment" id="CommentInNewExpense" class="form-control">
 					  	</div>
-					  	<div class="form-group col-md-3">
-						    <label for="DateInNewExpense">日期:&nbsp;</label>
-					      	<input type="Date" name="expenseDate" id="DateInNewExpense" class="form-control">
-					  	</div>
-					  	<div class="col-md-1">
+					  	
+					  	<div class="col-md-1 col-md-offset-1">
 						    <button type="button" class="btn btn-primary" id="expense_save_btn">保存</button>
 					  	</div>
 				    </div>
@@ -149,7 +169,9 @@
 	
 	</div>
 	<script type="text/javascript">
-		$(loadExpense());
+		$(
+			init()
+		);
 	</script>
 </body>
 </html>

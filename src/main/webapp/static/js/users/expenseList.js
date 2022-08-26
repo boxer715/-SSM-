@@ -1,74 +1,130 @@
-function loadAccountBook(){
+function init(){
+	loadAccounts();
+	loadOneTypes();
+	loadTwoTypes(1);
+	$(document).on("change","#TypeOneInNewExpense",loadTwoTypes);
+	$(document).on("click","#oneType_add_btn",addOneType);
+	$(document).on("click","#twoType_add_btn",addTwoType);
+	$(document).on("click","#type_save_btn",addType);
+}
+
+function addType(){
+	var baseUrl=localStorage.getItem("baseUrl");
+	var accountBookId = localStorage.getItem("accountBookId");
+	$("#hiddenAccountbookId").val(accountBookId)
+
 	$.ajax({
-		url:localStorage.getItem("baseUrl")+"accountBook",
-		data:"userId="+localStorage.getItem("userId"),
+		url:baseUrl+"type",
+		data:$("#TypeAddModal form").serialize(),
+		type:"POST",
+		success:function(result){
+			//1、关闭模态框
+			$("#TypeAddModal").modal('hide');
+			$("#TypeAddModal input[name=typeName]").val("");
+			$("#hiddenParentId").val("");
+			//2. 加载
+			var newType = result.extend.type;
+			var newParent = newType.typeParent;
+			if(newParent==null){
+				//说明新加了一个一级标签
+				loadOneTypes();
+
+			} else {
+				//否则添加了一个二级标签
+				loadTwoTypes();
+			}
+		}
+	});
+	
+}
+
+function addOneType(){
+	$("#addTypeLabel").text("添加一级类别");
+	openAddTypeModal();
+}
+
+function addTwoType(){
+	$("#addTypeLabel").text("添加二级类别");
+	$("#hiddenParentId").val($("#TypeOneInNewExpense").val());
+	openAddTypeModal();
+}
+
+function openAddTypeModal(){
+	//弹出模态框
+	$("#TypeAddModal").modal({
+		backdrop:"static"
+	});
+}
+
+function loadAccounts(){
+	var baseUrl=localStorage.getItem("baseUrl");
+	var accountBookId = localStorage.getItem("accountBookId");
+	var accountSelect = $("#AccountInNewExpense");
+	$.ajax({
+		url:baseUrl+"account",
+		data:"accountBookId="+accountBookId,
 		type:"GET",
 		success:function(result){
-			console.log(result);
 			if(result.code=="100"){
-				//处理成功
-				fillInAccountBook(result.extend.accountBookList);
+				var accounts = result.extend.accountList;
+				$.each(accounts, function(){
+					var accountOption = $("<option></option>").append(this.accountName).attr("value",this.accountId);
+					accountOption.appendTo(accountSelect);
+				});
 			} else {
-				//空账本
-				fillInMessage(result.extend.message);
+				$("#AccountInNewExpense option").text("无账户");
+			}
+			
+		}
+	});
+}
+
+function loadOneTypes(){
+	var baseUrl=localStorage.getItem("baseUrl");
+	var accountBookId = localStorage.getItem("accountBookId");
+	var typeOneSelect = $("#TypeOneInNewExpense");
+	typeOneSelect.empty();
+	
+	$.ajax({
+		url:baseUrl+"oneTypes",
+		data:"accountBookId="+accountBookId,
+		type:"GET",
+		success:function(result){
+				var types = result.extend.typeOneList;
+				$.each(types, function(){
+					var typeOneOption = $("<option></option>").append(this.typeName).attr("value",this.typeId);
+					typeOneOption.appendTo(typeOneSelect);
+				});
+				$("#TypeOneInNewExpense").val(1);
+		}
+	});
+}
+
+function loadTwoTypes(pId){
+	var parentId = isNumber(pId) ? pId : parseInt($("#TypeOneInNewExpense").val());
+	var baseUrl=localStorage.getItem("baseUrl");
+	var accountBookId = localStorage.getItem("accountBookId");
+	var typeTwoSelect = $("#TypeTwoInNewExpense");
+	typeTwoSelect.empty();
+	$.ajax({
+		url:baseUrl+"twoTypes",
+		data:"accountBookId="+accountBookId+"&parentId="+parentId,
+		type:"GET",
+		success:function(result){
+			var types = result.extend.typeTwoList;
+			if(types.length==0){
+				var typeTwoOption = $("<option></option>").append("暂无二级分类");
+				typeTwoOption.appendTo(typeTwoSelect);
+			} else {
+				$.each(types, function(){
+					var typeTwoOption = $("<option></option>").append(this.typeName).attr("value",this.typeId);
+					typeTwoOption.appendTo(typeTwoSelect);
+				});
 			}
 		}
 	});
 }
-//退出
-$(document).on("click","#logOutBtn",function(){
-	localStorage.removeItem("userId");
-	window.location.href = localStorage.getItem("baseUrl");
-});
-//点击新建账本，弹出模态框
-$(document).on("click","#newAccountBookBtn",function(){
-	$("#AccountBookAddModal form")[0].reset();
-	$("#hiddenUserId").val(localStorage.getItem("userId"));
-	$("#AccountBookAddModal").modal({
-		backdrop:"static"
-	});
-});
-//点击保存账本
-$(document).on("click","#accountBook_save_btn",function(){
-	$.ajax({
-		url:localStorage.getItem("baseUrl")+"accountBook",
-		data:$("#AccountBookAddModal form").serialize(),
-		type:"POST",
-		success:function(result){
-			$("#AccountBookAddModal").modal('hide');
-			loadAccountBook();
-		}
-	});
-});
 
-//单击账本跳转
-$(document).on("click",".accountBookBtn",function(){
-	localStorage.setItem("accountBookId",$(this).attr("accountbookid"));
-	window.location.href = localStorage.getItem("baseUrl")+"expenseList";
-})
-
-function fillInMessage(message){
-	var acctBook = $("#accountBooks");
-	var div25 = $('<div class="col-md-8 col-md-offset-2" style="height:25px;"></div>');
-	var div50 = $('<div class="col-md-8 col-md-offset-2" style="height:50px;"></div>');
-	acctBook.empty();
-	var messageH2 = $('<h2></h2>').append(message);
-	acctBook.append(div25)
-			.append(div50.addClass("center").append(messageH2));
-}
-
-function fillInAccountBook(accountBookList){
-	var acctBook = $("#accountBooks");
-	acctBook.empty();
-	$.each(accountBookList, function(index, item){
-		var div25 = $('<div class="col-md-8 col-md-offset-2" style="height:25px;"></div>');
-		var div50 = $('<div class="col-md-8 col-md-offset-2" style="height:50px;"></div>');
-		var btnBlue = $('<button type="button" class="btn btn-info btn-lg btn-block accountBookBtn"></button>');
-		var btnWhite = $('<button type="button" class="btn btn-default btn-lg btn-block accountBookBtn"></button>');
-		var btn = item.accountbookId%2==0 ? btnBlue : btnWhite;
-		btn.attr("accountBookId", item.accountbookId);
-		div50.append(btn.append(item.accountbookName));
-		acctBook.append(div25)
-				.append(div50);
-	})
+function isNumber(value) {
+	return typeof value === 'number' && !isNaN(value);
 }

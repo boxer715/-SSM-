@@ -303,6 +303,76 @@ public class TypeExample {
             addCriterion("type_name not between", value1, value2, "typeName");
             return (Criteria) this;
         }
+
+        public Criteria andAccountbookIdIsNull() {
+            addCriterion("accountBook_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdIsNotNull() {
+            addCriterion("accountBook_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdEqualTo(String value) {
+            addCriterion("accountBook_id =", value, "accountbookId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdNotEqualTo(String value) {
+            addCriterion("accountBook_id <>", value, "accountbookId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdGreaterThan(String value) {
+            addCriterion("accountBook_id >", value, "accountbookId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdGreaterThanOrEqualTo(String value) {
+            addCriterion("accountBook_id >=", value, "accountbookId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdLessThan(String value) {
+            addCriterion("accountBook_id <", value, "accountbookId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdLessThanOrEqualTo(String value) {
+            addCriterion("accountBook_id <=", value, "accountbookId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdLike(String value) {
+            addCriterion("accountBook_id like", value, "accountbookId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdNotLike(String value) {
+            addCriterion("accountBook_id not like", value, "accountbookId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdIn(List<String> values) {
+            addCriterion("accountBook_id in", values, "accountbookId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdNotIn(List<String> values) {
+            addCriterion("accountBook_id not in", values, "accountbookId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdBetween(String value1, String value2) {
+            addCriterion("accountBook_id between", value1, value2, "accountbookId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountbookIdNotBetween(String value1, String value2) {
+            addCriterion("accountBook_id not between", value1, value2, "accountbookId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

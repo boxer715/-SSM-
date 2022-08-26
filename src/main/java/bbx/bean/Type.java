@@ -1,11 +1,15 @@
 package bbx.bean;
 
+import bbx.utils.Utils;
+
 public class Type {
     private Integer typeId;
 
     private String typeParent;
 
     private String typeName;
+
+    private String accountbookId;
 
     public Integer getTypeId() {
         return typeId;
@@ -31,9 +35,19 @@ public class Type {
         this.typeName = typeName == null ? null : typeName.trim();
     }
 
+    public String getAccountbookId() {
+        return accountbookId;
+    }
+
+    public void setAccountbookId(String accountbookId) {
+        this.accountbookId = accountbookId == null ? null : accountbookId.trim();
+    }
+
 	@Override
 	public String toString() {
-		return "Type [typeId=" + typeId + ", typeParent=" + typeParent + ", typeName=" + typeName + "]";
+		String typeLevel = Utils.isStringEmptyOrNull(typeParent) ? "一级目录" : "二级目录";
+		return "Type [typeLevel=" + typeLevel + ", typeName=" + typeName + "]";
 	}
+    
     
 }

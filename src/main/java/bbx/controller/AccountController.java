@@ -60,11 +60,11 @@ public class AccountController {
 		return Msg.success()	;
 	}
 	
-	//这里的pathVariable要写成Account里属性名accountId，不然参数account没有id。
 	@ResponseBody
 	@RequestMapping(value="/account/{accountId}",method=RequestMethod.DELETE)
 	public Msg delete(@PathVariable("accountId") Integer id){
 		accountService.deleteAccountById(id);
 		return Msg.success().add("message", "delete successfully")	;
 	}
+	
 }

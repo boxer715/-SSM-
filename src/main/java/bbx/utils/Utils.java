@@ -11,4 +11,8 @@ public class Utils {
 			System.out.println(o);
 		}
 	}
+	
+	public static boolean isStringEmptyOrNull(String str) {
+		return str==null ? true : (str.isBlank() || str.isEmpty());
+	}
 }
